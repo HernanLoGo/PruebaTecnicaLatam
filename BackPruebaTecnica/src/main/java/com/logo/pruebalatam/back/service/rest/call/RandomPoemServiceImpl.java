@@ -2,13 +2,13 @@ package com.logo.pruebalatam.back.service.rest.call;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,20 +19,24 @@ public class RandomPoemServiceImpl implements RandomPoemService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RandomPoemServiceImpl.class);
 
-	@Value("${urlPoem}")
-	private String urlPoem;
+	private final String urlPoem;
 
-	@Autowired
 	private RestTemplate restTemplate;
+
+	public RandomPoemServiceImpl(RestTemplate restTemplate, @Value("${url.randompoem}") String urlPoem) {
+		this.urlPoem = urlPoem;
+		this.restTemplate = restTemplate;
+	}
 
 	public Poem[] callRandomPoem() {
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
 		ResponseEntity<Poem[]> response = null;
 
+		UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromUriString(urlPoem);
+
 		try {
-			response = restTemplate.getForEntity(urlPoem, Poem[].class);
+			response = restTemplate.getForEntity( uriBuilder.toUriString() , Poem[].class );
 
 			HttpStatus httpStatus = response.getStatusCode();
 

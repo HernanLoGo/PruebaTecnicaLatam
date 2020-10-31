@@ -1,7 +1,9 @@
 package com.logo.pruebalatam.back.service;
 
+import com.logo.pruebalatam.back.domain.Response;
+
 public interface PruebaTecnicaService {
 
-	public void logicaPruebaTecnica(String fechacumpleanio);
+	public Response logicaPruebaTecnica(String fechacumpleanio);
 
 }

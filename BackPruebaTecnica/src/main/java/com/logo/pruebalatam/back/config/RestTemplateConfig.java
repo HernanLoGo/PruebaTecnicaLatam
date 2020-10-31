@@ -10,12 +10,7 @@ public class RestTemplateConfig {
 	
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-//		builder.errorHandler(getErrorHandler());
 		return builder.build();
 	}
 	
-//	@Bean
-//	public CustomResponseErrorHandler getErrorHandler() {
-//	    return new CustomResponseErrorHandler();
-//	}
 }

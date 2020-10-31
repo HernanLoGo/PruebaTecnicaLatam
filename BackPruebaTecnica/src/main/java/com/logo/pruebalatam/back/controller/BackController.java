@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.logo.pruebalatam.back.domain.Response;
 import com.logo.pruebalatam.back.service.PruebaTecnicaService;
 
 @RestController
@@ -18,11 +19,16 @@ public class BackController {
 
 	@Autowired
 	private PruebaTecnicaService pruebaTecnicaService;
+	
 	@RequestMapping(value = "/logica", method = RequestMethod.GET)
-	public void LogicaPruebaTecnica(@RequestParam String fechacumpleanio) {
+	public Response LogicaPruebaTecnica(@RequestParam String fechacumpleanio) {
 		
 		LOGGER.info("Param:" + fechacumpleanio);
-		pruebaTecnicaService.logicaPruebaTecnica(fechacumpleanio);
+		Response response = pruebaTecnicaService.logicaPruebaTecnica(fechacumpleanio);
+		
+		LOGGER.info("Response:" + response);
+		
+		return response;
 
 	}
 
