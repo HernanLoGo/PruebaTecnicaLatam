@@ -6,8 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class BackPruebaTecnicaApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
 
+	@Test
+	public void main() {
+		BackPruebaTecnicaApplication.main(new String[] {});
+	}
 }

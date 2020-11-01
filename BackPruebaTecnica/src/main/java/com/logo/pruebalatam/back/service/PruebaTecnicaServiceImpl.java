@@ -26,13 +26,15 @@ public class PruebaTecnicaServiceImpl implements PruebaTecnicaService {
 	private static final String OK_POEM = "ok_poem";
 	private static final String OK_DIAS = "ok_dias";
 
+	private Random generator = new Random();
+	
 	@Autowired
 	private RandomPoemServiceImpl randomPoemRestCall;
 
 	public Response logicaPruebaTecnica(String fechaCumpleanio) {
 
 		Poem[] poems = null;
-		Response response = new Response();
+		Response response = null;
 
 		LocalDate fechaActual = LocalDate.now();
 		LocalDate dateCumpleanio = LocalDate.parse(fechaCumpleanio);
@@ -55,12 +57,12 @@ public class PruebaTecnicaServiceImpl implements PruebaTecnicaService {
 
 	private Response setResultadoDiasCumpleanios(Period period, LocalDate fechaActual, LocalDate dateCumpleanio) {
 		
-		Response response = new Response();
+		Response response = null;
 		
-		LocalDate cumpleanioFuturo = dateCumpleanio.plusYears(period.getYears() + 1);
+		LocalDate cumpleanioFuturo = dateCumpleanio.plusYears(period.getYears() + 1L);
 		
 		long numberOFDays = DAYS.between(fechaActual, cumpleanioFuturo);
-		LOGGER.info("Dias faltantes: " + numberOFDays);
+		LOGGER.info("Dias faltantes: {}", numberOFDays);
 		
 		response.setDiasParaCumpleanios(numberOFDays);
 		
@@ -96,8 +98,8 @@ public class PruebaTecnicaServiceImpl implements PruebaTecnicaService {
 
 	private Poem obtenerPoemaAleatorio(Poem[] poems) {
 
-		Random generator = new Random();
-		int randomIndex = generator.nextInt(poems.length);
+		
+		int randomIndex = this.generator.nextInt(poems.length);
 		return poems[randomIndex];
 
 	}

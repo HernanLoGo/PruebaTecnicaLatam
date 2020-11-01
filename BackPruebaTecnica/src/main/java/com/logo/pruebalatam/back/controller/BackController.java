@@ -3,8 +3,8 @@ package com.logo.pruebalatam.back.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,13 +20,13 @@ public class BackController {
 	@Autowired
 	private PruebaTecnicaService pruebaTecnicaService;
 	
-	@RequestMapping(value = "/logica", method = RequestMethod.GET)
-	public Response LogicaPruebaTecnica(@RequestParam String fechacumpleanio) {
+	@GetMapping("/logica")
+	public Response logicaPruebaTecnica(@RequestParam String fechacumpleanio) {
 		
-		LOGGER.info("Param:" + fechacumpleanio);
+		LOGGER.info("Param: {}", fechacumpleanio);
 		Response response = pruebaTecnicaService.logicaPruebaTecnica(fechacumpleanio);
 		
-		LOGGER.info("Response:" + response);
+		LOGGER.info("Response: {}", response);
 		
 		return response;
 

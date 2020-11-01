@@ -41,15 +41,17 @@ public class RandomPoemServiceImpl implements RandomPoemService {
 			HttpStatus httpStatus = response.getStatusCode();
 
 			if (httpStatus.is2xxSuccessful()) {
-				LOGGER.info("Response: " + gson.toJson(response.getBody()));
+				String message = gson.toJson(response.getBody());
+				LOGGER.info("Response: {}", message);
 				return response.getBody();
 			}
 
 		} catch (RestClientException e) {
-			LOGGER.error("El sercidor no responde: " + e.getMessage());
+			LOGGER.error("El sercidor no responde: {}", e.getMessage());
 		}
+		
+		return new Poem[0];
 
-		return null;
 	}
 
 }
