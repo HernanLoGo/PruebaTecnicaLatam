@@ -67,6 +67,17 @@ Una vez descargado todas las dependencias, levantamos el servidor usando el coma
 $ npm start
 ```
 
+En caso de que aparesca el mensaje
+```sh
+You must set the PowerShell Execution Policy from Restricted to RemoteSigned or Unrestricted to allow local PowerShell scripts to run.
+```
+
+Ejecutar el siguiente comando para solucionar el problema
+```sh
+$ Set-ExecutionPolicy Unrestricted
+```
+
+
  Una vez listo podemos acceder al front desde la siguiente url y usar la aplicacion
  ```sh
 $ http://localhost:4200/
