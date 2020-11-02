@@ -1,1 +1,143 @@
-<p>formulario works!</p>
+<div class="row justify-content-md-center mt-5" *ngIf="!loading && mostrarFormulario">
+    <div class="col-md-10">
+        <h4>Formulario</h4>
+        <hr>
+        <form autocomplete="off" [formGroup]="formulario" (ngSubmit)="buscar()">
+
+            <div>
+
+
+                <!-- Nombre -->
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Nombre</label>
+                    <div class="col-8">
+
+                        <input class="form-control" type="text" placeholder="Nombre" formControlName="nombre"
+                            [class.is-invalid]="nombreNoValido">
+                        <small *ngIf="nombreNoValido" class="text-danger">
+                            Nombre es obligatorio
+                        </small>
+
+                    </div>
+                </div>
+
+
+                <!-- Apellido -->
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Apellido</label>
+                    <div class="col-8">
+
+                        <input class="form-control" type="text" placeholder="Apellido" formControlName="apellido"
+                            [class.is-invalid]="apellidoNoValido">
+                        <small *ngIf="apellidoNoValido" class="text-danger">
+                            Apellido es obligatorio
+                        </small>
+                    </div>
+                </div>
+
+
+
+                <!-- Fecha Nacimiento -->
+                <div class="form-group row">
+                    <label class="col-2 col-form-label" for="dateOfBirth">Fecha de nacimiento</label>
+                    <div class="col-8">
+
+                        <input id="dateOfBirth" name="dateOfBirth" type="date" class="form-control"
+                            formControlName="fechaNacimiento" [class.is-invalid]="fechaNacimientoNoValido" />
+                        <small *ngIf="fechaNacimientoNoValido" class="text-danger">
+                            Fecha de Nacimiento es obligatorio
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Boton Enviar -->
+            <div class="form-group row">
+                <label class="col-2 col-form-label">&nbsp;</label>
+                <div class="input-group col-md-8">
+                    <button type="submit" class="btn btn-outline-primary btn-block">
+                        Enviar
+                    </button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="row justify-content-md-center mt-5" *ngIf="!mostrarFormulario">
+    <div class="row">
+
+        <div class="col-md-12" *ngIf="validacionMostrarDias">
+            Bienvenido: {{persona.nombre}} {{persona.apellido}} <br>
+            contamos que Faltan {{ response.diasParaCumpleanios }} días para tu cumpleños
+        </div>
+
+        <div class="col-md-12"
+            *ngIf="validacionMostrarPoema">
+            <h2>Felicidades!!!</h2> {{ persona.nombre }} {{ persona.apellido }}. Hoy es tu cumpleños, te dedicamos el
+            siguiente poema
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    <h3>Titulo</h3>
+                </div>
+                <div class="col-md-8" *ngIf="response.poems.title!=null">
+                    {{ response.poems.title }}
+                </div>
+                <div class="col-md-8" *ngIf="response.poems.title==null">
+                    Título desconocido
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <h3>Poema</h3>
+                </div>
+                <div class="col-md-8" *ngIf="response.poems.content!=null">
+                    {{ response.poems.content }}
+                </div>
+                <div class="col-md-8" *ngIf="response.poems.content==null">
+                    Poema no encontrado
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <h3>Poeta</h3>
+                </div>
+                <div class="col-md-8" *ngIf="response.poems.poet.name!=null">
+                    {{ response.poems.poet.name }}
+                </div>
+                <div class="col-md-8" *ngIf="response.poems.poet.name==null">
+                    Poeta desconocido
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <h3>Enlace</h3>
+                </div>
+                <div class="col-md-8" *ngIf="response.poems.url!=null">
+                    {{ response.poems.url }}
+                </div>
+                <div class="col-md-8" *ngIf="response.poems.url==null">
+                    Sin enlace activo
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <hr>
+    
+    <div class="row">
+        <div class="col-md-12 align-self-end">
+            <button class="btn btn-outline-primary btn-block" (click)="volver()">Volver </button>
+        </div>
+    </div>
+</div>

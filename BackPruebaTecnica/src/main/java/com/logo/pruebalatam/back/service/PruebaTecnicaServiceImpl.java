@@ -4,11 +4,13 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.logo.pruebalatam.back.domain.Poem;
@@ -28,6 +30,8 @@ public class PruebaTecnicaServiceImpl implements PruebaTecnicaService {
 
 	private Random generator = new Random();
 	
+	
+	
 	@Autowired
 	private RandomPoemServiceImpl randomPoemRestCall;
 
@@ -37,6 +41,8 @@ public class PruebaTecnicaServiceImpl implements PruebaTecnicaService {
 		Response response = null;
 
 		LocalDate fechaActual = LocalDate.now();
+		
+		
 		LocalDate dateCumpleanio = LocalDate.parse(fechaCumpleanio);
 
 		Period period = Period.between(dateCumpleanio, fechaActual);
@@ -57,11 +63,11 @@ public class PruebaTecnicaServiceImpl implements PruebaTecnicaService {
 
 	private Response setResultadoDiasCumpleanios(Period period, LocalDate fechaActual, LocalDate dateCumpleanio) {
 		
-		Response response = null;
+		Response response = new Response();
 		
 		LocalDate cumpleanioFuturo = dateCumpleanio.plusYears(period.getYears() + 1L);
 		
-		long numberOFDays = DAYS.between(fechaActual, cumpleanioFuturo);
+		Long numberOFDays = DAYS.between(fechaActual, cumpleanioFuturo);
 		LOGGER.info("Dias faltantes: {}", numberOFDays);
 		
 		response.setDiasParaCumpleanios(numberOFDays);
