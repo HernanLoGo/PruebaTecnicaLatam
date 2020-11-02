@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.gson.Gson;
 import com.logo.pruebalatam.back.domain.Response;
 import com.logo.pruebalatam.back.service.PruebaTecnicaService;
 
@@ -22,8 +21,6 @@ public class BackController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(BackController.class);
 	
-	private static final Gson gson = new Gson();
-
 	@Autowired
 	private PruebaTecnicaService pruebaTecnicaService;
 	
@@ -35,8 +32,12 @@ public class BackController {
 		
 		LOGGER.info("Response: {}", response);
 		
-		return new ResponseEntity<>(response, HttpStatus.OK);
-
+		if(response!=null) {
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+		}
+		
 	}
 
 }
