@@ -67,7 +67,7 @@ Una vez descargado todas las dependencias, levantamos el servidor usando el coma
 $ npm start
 ```
 
- Una vez listo podemos acceder al front desde la siguiente url
+ Una vez listo podemos acceder al front desde la siguiente url y usar la aplicacion
  ```sh
 $ http://localhost:4200/
 ```
