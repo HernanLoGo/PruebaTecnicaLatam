@@ -32,9 +32,14 @@ dependencies {
 	
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
 	
+
+	testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.7.22'
+
+	
 	
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

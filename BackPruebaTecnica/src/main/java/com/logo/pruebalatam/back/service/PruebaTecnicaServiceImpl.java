@@ -4,19 +4,17 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.logo.pruebalatam.back.domain.Poem;
 import com.logo.pruebalatam.back.domain.Response;
 import com.logo.pruebalatam.back.domain.ServiceStatus;
-import com.logo.pruebalatam.back.service.rest.call.RandomPoemServiceImpl;
+import com.logo.pruebalatam.back.service.rest.call.RandomPoemService;
 
 @Service
 public class PruebaTecnicaServiceImpl implements PruebaTecnicaService {
@@ -30,10 +28,8 @@ public class PruebaTecnicaServiceImpl implements PruebaTecnicaService {
 
 	private Random generator = new Random();
 	
-	
-	
 	@Autowired
-	private RandomPoemServiceImpl randomPoemRestCall;
+	private RandomPoemService randomPoemRestCall;
 
 	public Response logicaPruebaTecnica(String fechaCumpleanio) {
 
